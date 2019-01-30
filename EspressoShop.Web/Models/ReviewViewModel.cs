@@ -7,5 +7,6 @@
         public string ReviewText { get; set; }
         public string CreationDate { get; set; }
         public string ReviewerName { get; set; }
+        public int? Stars { get; set; }
     }
 }

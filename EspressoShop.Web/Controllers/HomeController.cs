@@ -47,7 +47,8 @@ namespace EspressoShop.Web.Controllers
                     Headline = x.Headline,
                     ReviewText = x.ReviewText,
                     CreationDate = x.CreationDate.Humanize(),
-                    ReviewerName = x.ReviewerName
+                    ReviewerName = x.ReviewerName,
+                    Stars = x.Stars
                 }).ToList()
             };
             return View(viewModel);

@@ -9,5 +9,6 @@ namespace EspressoShop.Web.Services
         public string ReviewText { get; set; }
         public DateTime CreationDate { get; set; }
         public string ReviewerName { get; set; }
+        public int? Stars { get; set; }
     }
 }

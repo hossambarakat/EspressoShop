@@ -3,6 +3,7 @@
     ViewData["Title"] = "ProductView";
 
 }
+@using System.Linq
 @model EspressoShop.Web.Models.ProductDetailsViewModel
 
 <main role="main">
@@ -37,9 +38,19 @@
                             <div class="media-body">
                                 <h5 class="mt-2 mb-1">@review.Headline</h5>
                                 <span class="text-muted">By @review.ReviewerName at @review.CreationDate</span>
-                                <div class="mb-2">
-                                    <i class="fa fa-xs fa-star text-warning"></i><i class="fa fa-xs fa-star text-warning"></i><i class="fa fa-xs fa-star text-warning"></i><i class="fa fa-xs fa-star text-warning"></i><i class="fa fa-xs fa-star text-warning"></i>
-                                </div>
+                                @if (review.Stars.HasValue)
+                                {
+                                    <div class="mb-2">
+
+                                        @{
+                                            var stars = Enumerable.Range(0, review.Stars.Value);
+                                            foreach (var start in stars)
+                                            {
+                                                <i class="text-warning">★</i>
+                                            }
+                                        }
+                                    </div>
+                                }
                                 <p class="text-muted">
                                     @review.ReviewText
                                 </p>
