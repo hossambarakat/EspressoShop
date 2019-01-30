@@ -32,7 +32,6 @@ namespace EspressoShop.Web
                 {
                     client.BaseAddress = new Uri(Configuration.GetValue<string>("ProductCatalogUrl"));
                 })
-                .SetHandlerLifetime(TimeSpan.FromMinutes(5))
                 .AddPolicyHandler(GetRetryPolicy());
 
             services.AddHttpClient<IReviewsServiceClient, ReviewsServiceClient>()
@@ -40,7 +39,6 @@ namespace EspressoShop.Web
                 {
                     client.BaseAddress = new Uri(Configuration.GetValue<string>("ReviewsUrl"));
                 })
-                .SetHandlerLifetime(TimeSpan.FromMinutes(5))
                 .AddPolicyHandler(GetRetryPolicy());
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
