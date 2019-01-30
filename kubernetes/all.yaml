@@ -1,0 +1,116 @@
+###############################################
+## Espresso Shop Web
+###############################################
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: espresso-shop-web
+spec:
+  replicas: 3
+  selector:
+      matchLabels:
+        app: espresso-shop-web
+  template:
+    metadata:
+      labels:
+        app: espresso-shop-web
+    spec:
+      containers:
+      - image: hossambarakat/espresso-shop-web
+        imagePullPolicy: IfNotPresent
+        name: espresso-shop-web
+        ports:
+        - containerPort: 80
+          name: http
+        env:
+        - name: ProductCatalogUrl
+          value: "http://espresso-shop-product-catalog-svc:8091"
+        - name: ReviewsUrl
+          value: "http://espresso-shop-reviews-svc:8092"
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: espresso-shop-web-svc
+spec:
+  selector:
+    app: espresso-shop-web
+  type: LoadBalancer
+  ports:
+  - port: 8090
+    targetPort: 80
+---
+###############################################
+## Espresso Shop Product Catalog
+###############################################
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: espresso-shop-product-catalog
+spec:
+  replicas: 3
+  selector:
+      matchLabels:
+        app: espresso-shop-product-catalog
+  template:
+    metadata:
+      labels:
+        app: espresso-shop-product-catalog
+    spec:
+      containers:
+      - image: hossambarakat/espresso-shop-product-catalog
+        imagePullPolicy: IfNotPresent
+        name: espresso-shop-product-catalog
+        ports:
+        - containerPort: 80
+          name: http
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: espresso-shop-product-catalog-svc
+spec:
+  selector:
+    app: espresso-shop-product-catalog
+  type: LoadBalancer
+  ports:
+  - port: 8091
+    targetPort: 80
+###############################################
+## Espresso Shop Reviews
+###############################################
+---
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: espresso-shop-reviews
+spec:
+  replicas: 3
+  selector:
+      matchLabels:
+        app: espresso-shop-reviews
+  template:
+    metadata:
+      labels:
+        app: espresso-shop-reviews
+    spec:
+      containers:
+      - image: hossambarakat/espresso-shop-reviews
+        imagePullPolicy: IfNotPresent
+        name: espresso-shop-reviews
+        ports:
+        - containerPort: 80
+          name: http
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: espresso-shop-reviews-svc
+spec:
+  selector:
+    app: espresso-shop-reviews
+  type: LoadBalancer
+  ports:
+  - port: 8092
+    targetPort: 80
+    name: external

@@ -1,0 +1,96 @@
+﻿
+@{
+    ViewData["Title"] = "ProductView";
+
+}
+@model EspressoShop.Web.Models.ProductDetailsViewModel
+
+<main role="main">
+    <div class="py-5">
+        <div class="container bg-light py-3 px-lg-5 py-lg-5">
+            <div class="row">
+                <div class="col-12 col-lg-5">
+                    <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail"><title>Placeholder</title><rect fill="#55595c" width="100%" height="100%" /><text fill="#eceeef" dy=".3em" x="50%" y="50%">Thumbnail</text></svg>
+
+                </div>
+                <div class="col-12 col-lg-7">
+                    <h2>@Model.Name</h2>
+                    <hr />
+                    <p>
+                        <h6>Product Description:</h6>
+                        @Model.Description
+                    </p>
+                    <hr />
+                </div>
+            </div>
+
+            <hr />
+
+            <h5 class="">Reviews</h5>
+
+            <div class="row mb-5">
+                <div class="col-lg-10 col-xl-9">
+
+                    @foreach (var review in Model.Reviews)
+                    {
+                        <div class="media review">
+                            <div class="media-body">
+                                <h5 class="mt-2 mb-1">@review.Headline</h5>
+                                <span class="text-muted">By @review.ReviewerName at @review.CreationDate</span>
+                                <div class="mb-2">
+                                    <i class="fa fa-xs fa-star text-warning"></i><i class="fa fa-xs fa-star text-warning"></i><i class="fa fa-xs fa-star text-warning"></i><i class="fa fa-xs fa-star text-warning"></i><i class="fa fa-xs fa-star text-warning"></i>
+                                </div>
+                                <p class="text-muted">
+                                    @review.ReviewText
+                                </p>
+                            </div>
+                        </div>
+                        <hr>
+                    }
+
+
+                    <div class="py-5 px-3">
+                        <h5 class="text-uppercase mb-4">Leave a review</h5>
+                        <form id="contact-form" method="post" action="contact.php" class="form">
+                            <div class="form-group">
+                                <label for="headline" class="form-label">Headline *</label>
+                                <input type="text" name="headline" id="headline" placeholder="Enter headline" required="required" class="form-control">
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for="name" class="form-label">Name *</label>
+                                        <input type="text" name="name" id="name" placeholder="Enter your name" required="required" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for="rating" class="form-label">Rating *</label>
+                                        <select name="rating" id="rating" class="custom-select focus-shadow-0">
+                                            <option value="5">★★★★★ (5/5)</option>
+                                            <option value="4">★★★★☆ (4/5)</option>
+                                            <option value="3">★★★☆☆ (3/5)</option>
+                                            <option value="2">★★☆☆☆ (2/5)</option>
+                                            <option value="1">★☆☆☆☆ (1/5)</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="review" class="form-label">Review *</label>
+                                <textarea rows="4" name="review" id="review" placeholder="Enter your review" required="required" class="form-control"></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-outline-dark">Post review</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+</main>
