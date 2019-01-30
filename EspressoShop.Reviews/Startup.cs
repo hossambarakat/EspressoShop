@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 
 namespace EspressoShop.Reviews
 {
@@ -40,8 +35,18 @@ namespace EspressoShop.Reviews
                 app.UseHsts();
             }
 
+            app.Use(async (context, next) =>
+            {
+                context.Response.OnStarting(state => {
+                    var httpContext = (HttpContext)state;
+                    context.Response.Headers.Add("x-service-version", Configuration.GetValue<string>("SERVICE_VERSION"));
+                    return Task.FromResult(0);
+                }, context);
+                await next.Invoke();
+            });
             app.UseHttpsRedirection();
             app.UseMvc();
+            
         }
     }
 }
