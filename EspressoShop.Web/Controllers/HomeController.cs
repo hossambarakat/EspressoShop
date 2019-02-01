@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Mvc;
 using EspressoShop.Web.Models;
 using Humanizer;
 using EspressoShop.Web.Services;
-using Microsoft.Extensions.Configuration;
 
 namespace EspressoShop.Web.Controllers
 {
@@ -41,7 +40,10 @@ namespace EspressoShop.Web.Controllers
                 Id = id,
                 Name = getProductTask.Result.Name,
                 Description = getProductTask.Result.Description,
-                Reviews = getReviewsTask.Result.Select(x => new ReviewViewModel
+            };
+            if(getReviewsTask.Result != null)
+            {
+                viewModel.Reviews = getReviewsTask.Result.Select(x => new ReviewViewModel
                 {
                     Id = x.Id,
                     Headline = x.Headline,
@@ -49,8 +51,8 @@ namespace EspressoShop.Web.Controllers
                     CreationDate = x.CreationDate.Humanize(),
                     ReviewerName = x.ReviewerName,
                     Stars = x.Stars
-                }).ToList()
-            };
+                }).ToList();
+            }
             return View(viewModel);
         }
 
