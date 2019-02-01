@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 
@@ -42,6 +43,10 @@ namespace EspressoShop.Reviews.Controllers
         [HttpGet("{productId}")]
         public ActionResult<IEnumerable<Review>> Get(int productId)
         {
+            if(productId %2 == 0)
+            {
+                Thread.Sleep(6000);
+            }
             var serviceVersion = _configuration.GetValue<string>("SERVICE_VERSION");
             if(serviceVersion == "v1")
             {
