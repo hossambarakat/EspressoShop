@@ -32,33 +32,39 @@
             <div class="row mb-5">
                 <div class="col-lg-10 col-xl-9">
 
-                    @foreach (var review in Model.Reviews)
+                    @if (Model.Reviews != null)
                     {
-                        <div class="media review">
-                            <div class="media-body">
-                                <h5 class="mt-2 mb-1">@review.Headline</h5>
-                                <span class="text-muted">By @review.ReviewerName at @review.CreationDate</span>
-                                @if (review.Stars.HasValue)
-                                {
-                                    <div class="mb-2">
+                        @foreach (var review in Model.Reviews)
+                        {
+                            <div class="media review">
+                                <div class="media-body">
+                                    <h5 class="mt-2 mb-1">@review.Headline</h5>
+                                    <span class="text-muted">By @review.ReviewerName at @review.CreationDate</span>
+                                    @if (review.Stars.HasValue)
+                                    {
+                                        <div class="mb-2">
 
-                                        @{
-                                            var stars = Enumerable.Range(0, review.Stars.Value);
-                                            foreach (var start in stars)
-                                            {
-                                                <i class="text-warning">★</i>
+                                            @{
+                                                var stars = Enumerable.Range(0, review.Stars.Value);
+                                                foreach (var start in stars)
+                                                {
+                                                    <i class="text-warning">★</i>
+                                                }
                                             }
-                                        }
-                                    </div>
-                                }
-                                <p class="text-muted">
-                                    @review.ReviewText
-                                </p>
+                                        </div>
+                                    }
+                                    <p class="text-muted">
+                                        @review.ReviewText
+                                    </p>
+                                </div>
                             </div>
-                        </div>
-                        <hr>
+                            <hr>
+                        }
                     }
-
+                    else
+                    {
+                        <div>Failed to retrieve product reviews</div>
+                    }
 
                     <div class="py-5 px-3">
                         <h5 class="text-uppercase mb-4">Leave a review</h5>
