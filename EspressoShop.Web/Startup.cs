@@ -3,9 +3,11 @@ using System.Net.Http;
 using EspressoShop.Web.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Polly;
 using Polly.Extensions.Http;
 
@@ -31,17 +33,19 @@ namespace EspressoShop.Web
                 .ConfigureHttpClient(client =>
                 {
                     client.BaseAddress = new Uri(Configuration.GetValue<string>("ProductCatalogUrl"));
-                })
-                .AddPolicyHandler(GetRetryPolicy());
+                });
+                //.AddPolicyHandler(GetRetryPolicy());
 
             services.AddHttpClient<IReviewsServiceClient, ReviewsServiceClient>()
                 .ConfigureHttpClient(client =>
                 {
                     client.BaseAddress = new Uri(Configuration.GetValue<string>("ReviewsUrl"));
-                })
-                .AddPolicyHandler(GetRetryPolicy());
+                });
+                //.AddPolicyHandler(GetRetryPolicy());
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+            services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
         }
 
         static IAsyncPolicy<HttpResponseMessage> GetRetryPolicy()
@@ -49,7 +53,10 @@ namespace EspressoShop.Web
             return HttpPolicyExtensions
                 .HandleTransientHttpError()
                 .OrResult(msg => msg.StatusCode == System.Net.HttpStatusCode.NotFound)
-                .WaitAndRetryAsync(6, retryAttempt => TimeSpan.FromSeconds(Math.Pow(2, retryAttempt)));
+                .WaitAndRetryAsync(6, retryAttempt => TimeSpan.FromSeconds(1),(r,ts) =>
+                {
+
+                });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
