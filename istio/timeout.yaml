@@ -1,0 +1,13 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: espresso-shop-reviews
+spec:
+  hosts:
+  - espresso-shop-reviews-svc
+  http:
+  - route:
+    - destination:
+        host: espresso-shop-reviews-svc
+        subset: v1
+    timeout: 0.5s
