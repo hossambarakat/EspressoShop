@@ -1,0 +1,37 @@
+apiVersion: "config.istio.io/v1alpha2"
+kind: denier
+metadata:
+  name: deny-reviews-v2-handler
+spec:
+  status:
+    code: 7
+    message: Not allowed
+---
+apiVersion: "config.istio.io/v1alpha2"
+kind: checknothing
+metadata:
+  name: deny-reviews-v2-request
+spec:
+---
+apiVersion: "config.istio.io/v1alpha2"
+kind: rule
+metadata:
+  name: deny-reviews
+spec:
+  match: destination.labels["app"] == "espresso-shop-reviews" && destination.labels["version"] == "v2"  && source.labels["app"]=="espresso-shop-web" 
+  actions:
+  - handler: deny-reviews-v2-handler.denier
+    instances: [ deny-reviews-v2-request.checknothing ]
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: espresso-shop-reviews
+spec:
+  hosts:
+  - espresso-shop-reviews-svc
+  http:
+  - route:
+    - destination:
+        host: espresso-shop-reviews-svc
+        subset: v2
