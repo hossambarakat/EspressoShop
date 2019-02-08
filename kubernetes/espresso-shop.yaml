@@ -6,7 +6,7 @@ apiVersion: apps/v1
 metadata:
   name: espresso-shop-web
 spec:
-  replicas: 3
+  replicas: 1
   selector:
       matchLabels:
         app: espresso-shop-web
@@ -14,10 +14,11 @@ spec:
     metadata:
       labels:
         app: espresso-shop-web
+        version: v1
     spec:
       containers:
       - image: hossambarakat/espresso-shop-web
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Always
         name: espresso-shop-web
         ports:
         - containerPort: 80
@@ -39,6 +40,7 @@ spec:
   ports:
   - port: 8090
     targetPort: 80
+    name: http
 ---
 ###############################################
 ## Espresso Shop Product Catalog
@@ -48,7 +50,7 @@ apiVersion: apps/v1
 metadata:
   name: espresso-shop-product-catalog
 spec:
-  replicas: 3
+  replicas: 1
   selector:
       matchLabels:
         app: espresso-shop-product-catalog
@@ -56,10 +58,11 @@ spec:
     metadata:
       labels:
         app: espresso-shop-product-catalog
+        version: v1
     spec:
       containers:
       - image: hossambarakat/espresso-shop-product-catalog
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Always
         name: espresso-shop-product-catalog
         ports:
         - containerPort: 80
@@ -76,31 +79,37 @@ spec:
   ports:
   - port: 8091
     targetPort: 80
+    name: http
 ###############################################
-## Espresso Shop Reviews
+## Espresso Shop Reviews V1
 ###############################################
 ---
 kind: Deployment
 apiVersion: apps/v1
 metadata:
-  name: espresso-shop-reviews
+  name: espresso-shop-reviews-v1
 spec:
-  replicas: 3
+  replicas: 1
   selector:
       matchLabels:
         app: espresso-shop-reviews
+        version: v1
   template:
     metadata:
       labels:
         app: espresso-shop-reviews
+        version: v1
     spec:
       containers:
       - image: hossambarakat/espresso-shop-reviews
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Always
         name: espresso-shop-reviews
         ports:
         - containerPort: 80
           name: http
+        env:
+          - name: SERVICE_VERSION
+            value: "v1"
 ---
 kind: Service
 apiVersion: v1
@@ -113,4 +122,34 @@ spec:
   ports:
   - port: 8092
     targetPort: 80
-    name: external
+    name: http
+###############################################
+## Espresso Shop Reviews V2
+###############################################
+---
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: espresso-shop-reviews-v2
+spec:
+  replicas: 1
+  selector:
+      matchLabels:
+        app: espresso-shop-reviews
+        version: v2
+  template:
+    metadata:
+      labels:
+        app: espresso-shop-reviews
+        version: v2
+    spec:
+      containers:
+      - image: hossambarakat/espresso-shop-reviews
+        imagePullPolicy: Always
+        name: espresso-shop-reviews
+        ports:
+        - containerPort: 80
+          name: http
+        env:
+        - name: SERVICE_VERSION
+          value: "v2"
