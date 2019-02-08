@@ -1,0 +1,41 @@
+#############################################
+## Virtual Services
+#############################################
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: espresso-shop-web
+spec:
+  hosts:
+  - espresso-shop-web-svc
+  http:
+  - route:
+    - destination:
+        host: espresso-shop-web-svc
+        subset: v1
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: espresso-shop-product-catalog
+spec:
+  hosts:
+  - espresso-shop-product-catalog-svc
+  http:
+  - route:
+    - destination:
+        host: espresso-shop-product-catalog-svc
+        subset: v1
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: espresso-shop-reviews
+spec:
+  hosts:
+  - espresso-shop-reviews-svc
+  http:
+  - route:
+    - destination:
+        host: espresso-shop-reviews-svc
+        subset: v1
