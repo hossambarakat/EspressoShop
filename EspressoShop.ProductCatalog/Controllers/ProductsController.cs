@@ -12,14 +12,14 @@ namespace EspressoShop.ProductCatalog.Controllers
                 new Product
                 {
                     Id=  1,
-                    Name = "Latte",
-                    Description = "asd"
+                    Name = "Flat white",
+                    Description = "A flat white is a coffee drink consisting of espresso with microfoam (steamed milk with small, fine bubbles and a glossy or velvety consistency). It is comparable to a latte, but smaller in volume and with less microfoam, therefore having a higher proportion of coffee to milk, and milk that is more velvety in consistency – allowing the espresso to dominate the flavour, while being supported by the milk."
                 },
                 new Product
                 {
                     Id=  2,
-                    Name = "Flat white",
-                    Description = "cool coffee"
+                    Name = "Latte",
+                    Description = "A latte is a coffee drink made with espresso and steamed milk. The term as used in English is a shortened form of the Italian caffè latte, caffelatte or caffellatte, which means \"milk coffee\""
                 }
             };
 

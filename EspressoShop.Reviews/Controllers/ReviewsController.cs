@@ -17,8 +17,8 @@ namespace EspressoShop.Reviews.Controllers
                 {
                     ProductId = 1,
                     Id=  1,
-                    Headline = "Cool Coffee",
-                    ReviewText = "asd",
+                    Headline = "Strong Enough Coffee!",
+                    ReviewText = "",
                     CreationDate = DateTime.Today,
                     ReviewerName = "Jon",
                     Stars = 1
@@ -28,8 +28,8 @@ namespace EspressoShop.Reviews.Controllers
                 {
                     ProductId = 1,
                     Id=  2,
-                    Headline = "Flat white",
-                    ReviewText = "cool coffee",
+                    Headline = "I love this coffee",
+                    ReviewText = "",
                     CreationDate = DateTime.Today.AddDays(-20),
                     ReviewerName = "Paul",
                     Stars = 5

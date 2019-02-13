@@ -11,17 +11,15 @@
         <div class="container bg-light py-3 px-lg-5 py-lg-5">
             <div class="row">
                 <div class="col-12 col-lg-5">
-                    <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail"><title>Placeholder</title><rect fill="#55595c" width="100%" height="100%" /><text fill="#eceeef" dy=".3em" x="50%" y="50%">Thumbnail</text></svg>
+                    <img src="~/images/@(Model.Name).jpg" height="225" alt="@Model.Name" />
 
                 </div>
                 <div class="col-12 col-lg-7">
                     <h2>@Model.Name</h2>
                     <hr />
                     <p>
-                        <h6>Product Description:</h6>
                         @Model.Description
                     </p>
-                    <hr />
                 </div>
             </div>
 
@@ -34,32 +32,40 @@
 
                     @if (Model.Reviews != null)
                     {
-                        @foreach (var review in Model.Reviews)
+                        if (Model.Reviews.Count > 0)
                         {
-                            <div class="media review">
-                                <div class="media-body">
-                                    <h5 class="mt-2 mb-1">@review.Headline</h5>
-                                    <span class="text-muted">By @review.ReviewerName at @review.CreationDate</span>
-                                    @if (review.Stars.HasValue)
-                                    {
-                                        <div class="mb-2">
+                            @foreach (var review in Model.Reviews)
+                            {
+                                <div class="media review">
+                                    <div class="media-body">
+                                        <h5 class="mt-2 mb-1">@review.Headline</h5>
+                                        <span class="text-muted">By @review.ReviewerName at @review.CreationDate</span>
+                                        @if (review.Stars.HasValue)
+                                        {
+                                            <div class="mb-2">
 
-                                            @{
-                                                var stars = Enumerable.Range(0, review.Stars.Value);
-                                                foreach (var start in stars)
-                                                {
-                                                    <i class="text-warning">★</i>
+                                                @{
+                                                    var stars = Enumerable.Range(0, review.Stars.Value);
+                                                    foreach (var start in stars)
+                                                    {
+                                                        <i class="text-warning">★</i>
+                                                    }
                                                 }
-                                            }
-                                        </div>
-                                    }
-                                    <p class="text-muted">
-                                        @review.ReviewText
-                                    </p>
+                                            </div>
+                                        }
+                                        <p class="text-muted">
+                                            @review.ReviewText
+                                        </p>
+                                    </div>
                                 </div>
-                            </div>
-                            <hr>
+                                <hr>
+                            }
                         }
+                        else
+                        {
+                                <div>No reviews yet!</div>
+                        }
+
                     }
                     else
                     {
