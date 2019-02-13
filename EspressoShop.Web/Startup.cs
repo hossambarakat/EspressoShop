@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Net.Http;
 using EspressoShop.Web.Services;
 using Microsoft.AspNetCore.Builder;
@@ -71,6 +72,15 @@ namespace EspressoShop.Web
                 app.UseExceptionHandler("/Home/Error");
                 app.UseHsts();
             }
+
+            app.Use((context, next) =>
+            {
+                if(context.Request.Headers.Keys.Contains("x-b3-traceid"))
+                {
+                    context.Response.Headers["x-b3-traceid"] = context.Request.Headers["x-b3-traceid"].FirstOrDefault();
+                }
+                return next.Invoke();
+            });
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
