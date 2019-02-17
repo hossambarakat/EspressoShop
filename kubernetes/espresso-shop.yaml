@@ -127,29 +127,29 @@ spec:
 ## Espresso Shop Reviews V2
 ###############################################
 ---
-kind: Deployment
-apiVersion: apps/v1
-metadata:
-  name: espresso-shop-reviews-v2
-spec:
-  replicas: 1
-  selector:
-      matchLabels:
-        app: espresso-shop-reviews
-        version: v2
-  template:
-    metadata:
-      labels:
-        app: espresso-shop-reviews
-        version: v2
-    spec:
-      containers:
-      - image: hossambarakat/espresso-shop-reviews
-        imagePullPolicy: Always
-        name: espresso-shop-reviews
-        ports:
-        - containerPort: 80
-          name: http
-        env:
-        - name: SERVICE_VERSION
-          value: "v2"
+# kind: Deployment
+# apiVersion: apps/v1
+# metadata:
+#   name: espresso-shop-reviews-v2
+# spec:
+#   replicas: 1
+#   selector:
+#       matchLabels:
+#         app: espresso-shop-reviews
+#         version: v2
+#   template:
+#     metadata:
+#       labels:
+#         app: espresso-shop-reviews
+#         version: v2
+#     spec:
+#       containers:
+#       - image: hossambarakat/espresso-shop-reviews
+#         imagePullPolicy: Always
+#         name: espresso-shop-reviews
+#         ports:
+#         - containerPort: 80
+#           name: http
+#         env:
+#         - name: SERVICE_VERSION
+#           value: "v2"
