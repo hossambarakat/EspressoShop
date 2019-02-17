@@ -9,7 +9,7 @@ spec:
   - match:
     - headers:
         User-Agent:
-          regex: ".*Edge.*"
+          regex: .*Firefox.*
     route:
     - destination:
         host: espresso-shop-reviews-svc
