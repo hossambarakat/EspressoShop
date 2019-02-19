@@ -6,7 +6,3 @@ docker push hossambarakat/espresso-shop-product-catalog
 
 docker build . -f EspressoShop.Reviews/dockerfile -t hossambarakat/espresso-shop-reviews
 docker push hossambarakat/espresso-shop-reviews
-
-
-kubectl delete -f .\kubernetes\espresso-shop.yaml
-istioctl kube-inject -f .\kubernetes\espresso-shop.yaml | kubectl apply -f -
