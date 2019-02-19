@@ -18,7 +18,7 @@ namespace EspressoShop.Reviews.Controllers
                     ProductId = 1,
                     Id=  1,
                     Headline = "Strong Enough Coffee!",
-                    ReviewText = "",
+                    ReviewText = "This is the best coffee. Great flavour and good quality.",
                     CreationDate = DateTime.Today,
                     ReviewerName = "Jon",
                     Stars = 1
@@ -29,7 +29,7 @@ namespace EspressoShop.Reviews.Controllers
                     ProductId = 1,
                     Id=  2,
                     Headline = "I love this coffee",
-                    ReviewText = "",
+                    ReviewText = "Great coffee that has a good taste but not as strong as I would like it to be",
                     CreationDate = DateTime.Today.AddDays(-20),
                     ReviewerName = "Paul",
                     Stars = 5
