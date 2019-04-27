@@ -12,7 +12,7 @@ namespace EspressoShop.Reviews.Controllers
     public class ReviewsController : ControllerBase
     {
         private readonly IConfiguration _configuration;
-        private Review[] reviews = new Review[] {
+        private readonly Review[] _reviews = {
                 new Review
                 {
                     ProductId = 1,
@@ -50,11 +50,11 @@ namespace EspressoShop.Reviews.Controllers
             var serviceVersion = _configuration.GetValue<string>("SERVICE_VERSION");
             if(serviceVersion == "v1")
             {
-                return reviews.Select(x => { x.Stars = null; return x; }).Where(x => x.ProductId == productId).ToArray();
+                return _reviews.Select(x => { x.Stars = null; return x; }).Where(x => x.ProductId == productId).ToArray();
             }
             else
             {
-                return reviews.Where(x => x.ProductId == productId).ToArray();
+                return _reviews.Where(x => x.ProductId == productId).ToArray();
             }
             
         }

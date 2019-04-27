@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Net.Http;
 using EspressoShop.Web.Services;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -35,15 +36,16 @@ namespace EspressoShop.Web
                 {
                     client.BaseAddress = new Uri(Configuration.GetValue<string>("ProductCatalogUrl"));
                 });
-                //.AddPolicyHandler(GetRetryPolicy());
+            //.AddPolicyHandler(GetRetryPolicy());
 
             services.AddHttpClient<IReviewsServiceClient, ReviewsServiceClient>()
                 .ConfigureHttpClient(client =>
                 {
                     client.BaseAddress = new Uri(Configuration.GetValue<string>("ReviewsUrl"));
                 });
-                //.AddPolicyHandler(GetRetryPolicy());
+            //.AddPolicyHandler(GetRetryPolicy());
 
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
             services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
@@ -54,10 +56,10 @@ namespace EspressoShop.Web
             return HttpPolicyExtensions
                 .HandleTransientHttpError()
                 .OrResult(msg => msg.StatusCode == System.Net.HttpStatusCode.NotFound)
-                .WaitAndRetryAsync(6, retryAttempt => TimeSpan.FromSeconds(1),(r,ts) =>
-                {
+                .WaitAndRetryAsync(6, retryAttempt => TimeSpan.FromSeconds(1), (r, ts) =>
+                 {
 
-                });
+                 });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -75,7 +77,7 @@ namespace EspressoShop.Web
 
             app.Use((context, next) =>
             {
-                if(context.Request.Headers.Keys.Contains("x-b3-traceid"))
+                if (context.Request.Headers.Keys.Contains("x-b3-traceid"))
                 {
                     context.Response.Headers["x-b3-traceid"] = context.Request.Headers["x-b3-traceid"].FirstOrDefault();
                 }
@@ -85,6 +87,7 @@ namespace EspressoShop.Web
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
+            app.UseAuthentication();
 
             app.UseMvc(routes =>
             {

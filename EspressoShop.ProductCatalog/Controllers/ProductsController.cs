@@ -8,7 +8,7 @@ namespace EspressoShop.ProductCatalog.Controllers
     [ApiController]
     public class ProductsController : ControllerBase
     {
-        private Product[] products = new Product[] {
+        private readonly Product[] _products = {
                 new Product
                 {
                     Id=  1,
@@ -26,13 +26,13 @@ namespace EspressoShop.ProductCatalog.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<Product>> Get()
         {
-            return products;
+            return _products;
         }
 
         [HttpGet("{id}")]
         public ActionResult<Product> Get(int id)
         {
-            return products.FirstOrDefault(x => x.Id == id);
+            return _products.FirstOrDefault(x => x.Id == id);
         }
     }
     public class Product
