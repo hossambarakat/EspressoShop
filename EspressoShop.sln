@@ -1,13 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.271
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28729.10
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EspressoShop.Web", "EspressoShop.Web\EspressoShop.Web.csproj", "{49B5E972-F48F-4CD1-A969-A575C71668E9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EspressoShop.Web", "EspressoShop.Web\EspressoShop.Web.csproj", "{49B5E972-F48F-4CD1-A969-A575C71668E9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EspressoShop.ProductCatalog", "EspressoShop.ProductCatalog\EspressoShop.ProductCatalog.csproj", "{3D834658-B02B-40D4-BC11-A30FFD61A5EC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EspressoShop.ProductCatalog", "EspressoShop.ProductCatalog\EspressoShop.ProductCatalog.csproj", "{3D834658-B02B-40D4-BC11-A30FFD61A5EC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EspressoShop.Reviews", "EspressoShop.Reviews\EspressoShop.Reviews.csproj", "{78DF61ED-7AA2-4C5E-92FE-3CD00D281395}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EspressoShop.Reviews", "EspressoShop.Reviews\EspressoShop.Reviews.csproj", "{78DF61ED-7AA2-4C5E-92FE-3CD00D281395}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

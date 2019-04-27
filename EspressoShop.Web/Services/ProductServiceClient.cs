@@ -9,25 +9,25 @@ namespace EspressoShop.Web.Services
 {
     public class ProductServiceClient : IProductServiceClient
     {
-        private readonly HttpClient client;
-        private readonly IHttpContextAccessor httpContextAccessor;
+        private readonly HttpClient _client;
+        private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly ILogger _logger;
 
         public ProductServiceClient(HttpClient client, IHttpContextAccessor httpContextAccessor, ILoggerFactory loggerFactory)
         {
-            this.client = client;
-            this.httpContextAccessor = httpContextAccessor;
+            this._client = client;
+            this._httpContextAccessor = httpContextAccessor;
             _logger = loggerFactory.CreateLogger<ProductServiceClient>();
         }
         public async Task<IEnumerable<Product>> GetProductsAsync()
         {
             try
             {
-                var userAgent = httpContextAccessor.HttpContext.Request.Headers["User-Agent"].ToString();
-                client.DefaultRequestHeaders.Add("User-Agent", userAgent);
-                HeadersHelper.AddTracingHeaders(client, httpContextAccessor);
+                var userAgent = _httpContextAccessor.HttpContext.Request.Headers["User-Agent"].ToString();
+                _client.DefaultRequestHeaders.Add("User-Agent", userAgent);
+                HeadersHelper.AddTracingHeaders(_client, _httpContextAccessor);
 
-                var productsResponse = await client.GetAsync("api/products");
+                var productsResponse = await _client.GetAsync("api/products");
 
                 var products = await productsResponse.Content.ReadAsAsync<List<Product>>();
 
@@ -43,11 +43,11 @@ namespace EspressoShop.Web.Services
             try
             {
                 _logger.LogInformation("Loading product with {ProductId}", id);
-                var userAgent = httpContextAccessor.HttpContext.Request.Headers["User-Agent"].ToString();
-                client.DefaultRequestHeaders.Add("User-Agent", userAgent);
-                HeadersHelper.AddTracingHeaders(client, httpContextAccessor);
+                var userAgent = _httpContextAccessor.HttpContext.Request.Headers["User-Agent"].ToString();
+                _client.DefaultRequestHeaders.Add("User-Agent", userAgent);
+                HeadersHelper.AddTracingHeaders(_client, _httpContextAccessor);
 
-                var productsResponse = await client.GetAsync($"api/products/{id}");
+                var productsResponse = await _client.GetAsync($"api/products/{id}");
 
                 var product = await productsResponse.Content.ReadAsAsync<Product>();
 
