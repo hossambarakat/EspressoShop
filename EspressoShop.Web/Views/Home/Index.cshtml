@@ -1,18 +1,18 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
+@using Humanizer
 @model System.Collections.Generic.List<EspressoShop.Web.Models.ProductViewModel>
 
 
 <main role="main">
 
-    <section class="jumbotron text-center">
-        <div class="container">
-            <h1 class="jumbotron-heading">Espresso Shop</h1>
-        </div>
-    </section>
+    <div class="jumbotron mt-4">
+        <h1 class="display-4">Espresso Shop</h1>
+        <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+    </div>
 
-    <div class="album py-5 bg-light">
+    <div>
         <div class="container">
 
             <div class="row">
@@ -23,11 +23,10 @@
                             <img src="~/images/@(product.Name.ToLower()).jpg" height="225" alt="@product.Name"/>
                             <div class="card-body">
                                 <h5 class="card-title">@product.Name</h5>
-                                @*<p class="card-text">@product.Description</p>*@
+                                <p class="card-text">@product.Description.Truncate(65)</p>
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div class="btn-group">
-                                        
-                                        <a class="btn btn-sm btn-outline-secondary" asp-route-id="@product.Id" asp-action="product" role="button">View</a>
+                                        <a class="btn btn-outline-primary" asp-route-id="@product.Id" asp-action="product" role="button">Learn More</a>
 
                                     </div>
 

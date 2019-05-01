@@ -18,26 +18,14 @@
 </head>
 <body>
     <header>
-        <div class="collapse bg-dark" id="navbarHeader">
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm-8 col-md-7 py-4">
-                        <h4 class="text-white">About</h4>
-                        <p class="text-muted">Add some information about the album below, the author, or any other background context. Make it a few sentences long so folks can pick up some informative tidbits. Then, link them off to some social networking sites or contact information.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="navbar navbar-dark bg-dark shadow-sm">
-            <div class="container d-flex justify-content-between">
-                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand d-flex align-items-center">
-                    <strong>Espresso Shop</strong>
-                </a>
-
+        <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
+                <h5 class="my-0 mr-md-auto font-weight-normal">
+                    <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">
+                        Espresso Shop
+                    </a>
+                </h5>
                 <partial name="_LoginPartial" />
             </div>
-            
-        </div>
     </header>
 
     <div class="container body-content">

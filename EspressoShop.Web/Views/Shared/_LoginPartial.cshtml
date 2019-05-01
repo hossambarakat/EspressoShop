@@ -2,20 +2,13 @@
 
 @if (HttpContextAccessor.HttpContext.User.Identity.IsAuthenticated)
 {
-    <span class="navbar-text ml-auto text-white">Welcome, @HttpContextAccessor.HttpContext.User.Identity.Name</span>
-    <ul class="navbar-nav navbar-right">
-
-        <li class="nav-item">
-            <form asp-controller="Account" asp-action="Logout" method="post" id="logoutForm" class="navbar-right">
-                <button type="submit" class="btn btn-link text-white">Log out</button>
-            </form>
-        </li>
-    </ul>
+    <span class="navbar-text ml-auto mr-md-3">Welcome, @HttpContextAccessor.HttpContext.User.Identity.Name</span>
+    <form asp-controller="Account" asp-action="Logout" method="post" id="logoutForm" class="navbar-right">
+        <button type="submit" class="btn btn-outline-primary">Log out</button>
+    </form>
 
 }
 else
 {
-    <ul class="nav navbar-nav navbar-right">
-        <li><a asp-action="Login" asp-controller="Account" class="text-white">Log in</a></li>
-    </ul>
+    <a asp-action="Login" asp-controller="Account" class="btn btn-outline-primary">Log in</a>
 }

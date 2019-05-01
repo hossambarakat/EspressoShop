@@ -20,6 +20,30 @@ namespace EspressoShop.ProductCatalog.Controllers
                     Id=  2,
                     Name = "Latte",
                     Description = "A latte is a coffee drink made with espresso and steamed milk. The term as used in English is a shortened form of the Italian caffè latte, caffelatte or caffellatte, which means \"milk coffee\""
+                },
+                new Product
+                {
+                    Id=  3,
+                    Name = "Macchiato",
+                    Description = "Caffè macchiato, sometimes called espresso macchiato, is an espresso coffee drink with a small amount of milk, usually foamed"
+                },
+                new Product
+                {
+                    Id=  4,
+                    Name = "Cappuccino",
+                    Description = "A cappuccino is an espresso-based coffee drink that originated in Italy, and is traditionally prepared with steamed milk foam. Variations of the drink involve the use of cream instead of milk, and flavoring with cinnamon or chocolate powder"
+                },
+                new Product
+                {
+                    Id=  5,
+                    Name = "Espresso",
+                    Description = "Espresso is coffee of Italian origin, brewed by expressing or forcing a small amount of nearly boiling water under pressure through finely ground coffee beans"
+                },
+                new Product
+                {
+                    Id=  6,
+                    Name = "Piccolo",
+                    Description = "A baby latte that is made with espresso and steamed milk."
                 }
             };
 
