@@ -80,6 +80,7 @@ namespace EspressoShop.Web
                 if (context.Request.Headers.Keys.Contains("x-b3-traceid"))
                 {
                     context.Response.Headers["x-b3-traceid"] = context.Request.Headers["x-b3-traceid"].FirstOrDefault();
+                    context.Response.Headers["x-request-id"] = context.Request.Headers["x-b3-traceid"].FirstOrDefault();
                 }
                 return next.Invoke();
             });
