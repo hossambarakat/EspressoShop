@@ -18,7 +18,8 @@ spec:
     spec:
       containers:
       - image: hossambarakat/espresso-shop-web
-        imagePullPolicy: Always
+        # imagePullPolicy: Always
+        imagePullPolicy: IfNotPresent
         name: espresso-shop-web
         ports:
         - containerPort: 80
@@ -62,7 +63,8 @@ spec:
     spec:
       containers:
       - image: hossambarakat/espresso-shop-product-catalog
-        imagePullPolicy: Always
+        # imagePullPolicy: Always
+        imagePullPolicy: IfNotPresent
         name: espresso-shop-product-catalog
         ports:
         - containerPort: 80
@@ -102,7 +104,8 @@ spec:
     spec:
       containers:
       - image: hossambarakat/espresso-shop-reviews
-        imagePullPolicy: Always
+        # imagePullPolicy: Always
+        imagePullPolicy: IfNotPresent
         name: espresso-shop-reviews
         ports:
         - containerPort: 80
@@ -110,19 +113,6 @@ spec:
         env:
           - name: SERVICE_VERSION
             value: "v1"
----
-kind: Service
-apiVersion: v1
-metadata:
-  name: espresso-shop-reviews-svc
-spec:
-  selector:
-    app: espresso-shop-reviews
-  type: LoadBalancer
-  ports:
-  - port: 8092
-    targetPort: 80
-    name: http
 ###############################################
 ## Espresso Shop Reviews V2
 ###############################################
@@ -145,7 +135,8 @@ spec:
     spec:
       containers:
       - image: hossambarakat/espresso-shop-reviews
-        imagePullPolicy: Always
+        # imagePullPolicy: Always
+        imagePullPolicy: IfNotPresent
         name: espresso-shop-reviews
         ports:
         - containerPort: 80
@@ -153,3 +144,16 @@ spec:
         env:
         - name: SERVICE_VERSION
           value: "v2"
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: espresso-shop-reviews-svc
+spec:
+  selector:
+    app: espresso-shop-reviews
+  type: LoadBalancer
+  ports:
+  - port: 8092
+    targetPort: 80
+    name: http
